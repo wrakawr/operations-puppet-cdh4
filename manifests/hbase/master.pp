@@ -1,7 +1,9 @@
 # == Class cdh4::hbase::master
 # Installs HBase master
 #
-class cdh4::hbase::master {
+class cdh4::hbase::master(
+  $regionservers    = undef,
+) {
 
   Class['cdh4::hbase'] -> Class['cdh4::hbase::master']
 
@@ -9,12 +11,23 @@ class cdh4::hbase::master {
     ensure => 'installed',
   }
 
+
+  if ($regionservers == undef) {
+    fail("you must provide list of regionservers hosts")
+  }
+
+  file { "${::cdh4::hbase::config_directory}/regionservers":
+    content => template('cdh4/hbase/regionservers.erb'),
+  }
+
+
   service { 'hbase-master':
     ensure      => 'running',
     enable      => true,
     hasrestart  => true,
-    require     => File["${::cdh4::hbase::config_directory}/hbase-site.xml"],
-    subscribe   => File["${::cdh4::hbase::config_directory}/hbase-site.xml"],
+    require     => [ File["${::cdh4::hbase::config_directory}/hbase-site.xml"], File["${::cdh4::hbase::config_directory}/regionservers"], ],
+    subscribe   => [ File["${::cdh4::hbase::config_directory}/hbase-site.xml"], File["${::cdh4::hbase::config_directory}/regionservers"], ],
+    
   }
 
   # sudo -u hdfs hadoop fs -mkdir /hbase

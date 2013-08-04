@@ -9,6 +9,7 @@ class cdh4::hbase(
   $zookeeper_master = $::cdh4::hbase::defaults::zookeeper_master,
 ) inherits cdh4::hbase::defaults 
 {
+
   package { 'hbase':
     ensure => 'installed',
   }
