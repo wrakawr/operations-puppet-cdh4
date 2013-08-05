@@ -26,9 +26,22 @@ class cdh4::hbase::master(
     enable      => true,
     hasrestart  => true,
     require     => [ File["${::cdh4::hbase::config_directory}/hbase-site.xml"], File["${::cdh4::hbase::config_directory}/regionservers"], ],
-    subscribe   => [ File["${::cdh4::hbase::config_directory}/hbase-site.xml"], File["${::cdh4::hbase::config_directory}/regionservers"], ],
-    
+    subscribe   => [ File["${::cdh4::hbase::config_directory}/hbase-site.xml"], File["${::cdh4::hbase::config_directory}/regionservers"], ], 
   }
+
+
+  package { 'hbase-thrift':
+    ensure => 'installed',
+  }
+
+  service { 'hbase-thrift':
+    ensure      => 'running',
+    enable      => true,
+    hasrestart  => true,
+    require     => [ File["${::cdh4::hbase::config_directory}/hbase-site.xml"], File["${::cdh4::hbase::config_directory}/regionservers"], ],
+    subscribe   => [ File["${::cdh4::hbase::config_directory}/hbase-site.xml"], File["${::cdh4::hbase::config_directory}/regionservers"], ],
+  }
+
 
   # sudo -u hdfs hadoop fs -mkdir /hbase
   # sudo -u hdfs hadoop fs -chown hbase /hbase
