@@ -6,4 +6,5 @@ class cdh4::hbase::defaults {
   $config_directory = '/etc/hbase/conf'
   $master_domain    = undef
   $zookeeper_master = undef
+  $hbase_heap_size_mb = 1500
 }

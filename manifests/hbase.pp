@@ -17,4 +17,9 @@ class cdh4::hbase(
   file { "${config_directory}/hbase-site.xml":
     content => template('cdh4/hbase/hbase-site.xml.erb'),
   }
+
+  file { "${config_directory}/hbase-env.sh":
+    content => template('cdh4/hbase/hbase-env.sh.erb'),
+  }
+
 }

@@ -25,8 +25,8 @@ class cdh4::hbase::master(
     ensure      => 'running',
     enable      => true,
     hasrestart  => true,
-    require     => [ File["${::cdh4::hbase::config_directory}/hbase-site.xml"], File["${::cdh4::hbase::config_directory}/regionservers"], ],
-    subscribe   => [ File["${::cdh4::hbase::config_directory}/hbase-site.xml"], File["${::cdh4::hbase::config_directory}/regionservers"], ], 
+    require     => [ File["${::cdh4::hbase::config_directory}/hbase-site.xml"], File["${::cdh4::hbase::config_directory}/regionservers"], File["${::cdh4::hbase::config_directory}/hbase-env.sh"], ],
+    subscribe   => [ File["${::cdh4::hbase::config_directory}/hbase-site.xml"], File["${::cdh4::hbase::config_directory}/regionservers"], File["${::cdh4::hbase::config_directory}/hbase-env.sh"], ], 
   }
 
 
