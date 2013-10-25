@@ -17,5 +17,6 @@ class cdh4::hadoop::tasktracker {
     enable  => true,
     alias   => 'tasktracker',
     require => Package['hadoop-0.20-mapreduce-tasktracker'],
+    subscribe => File["${::cdh4::hadoop::config_directory}/mapred-site.xml"],
   }
 }
