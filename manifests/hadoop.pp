@@ -39,6 +39,7 @@
 #   $yarn_resourcemanager_scheduler_class - If you change this (e.g. to FairScheduler), you should also provide your own scheduler config .xml files outside of the cdh4 module.
 #   $use_yarn
 #   $enable_lzo          - Enables LZO compression in Hadoop. Default: false 
+#   $replication_factor	 - Set default replication factor
 #
 class cdh4::hadoop(
   $namenode_hostname,
@@ -68,7 +69,8 @@ class cdh4::hadoop(
   $yarn_nodemanager_resource_memory_mb     = $::cdh4::hadoop::defaults::yarn_nodemanager_resource_memory_mb,
   $yarn_resourcemanager_scheduler_class    = $::cdh4::hadoop::defaults::yarn_resourcemanager_scheduler_class,
   $use_yarn                                = $::cdh4::hadoop::defaults::use_yarn,
-  $enable_lzo                              =$::cdh4::hadoop::defaults::enable_lzo
+  $enable_lzo                              = $::cdh4::hadoop::defaults::enable_lzo,
+  $replication_factor                      = $::cdh4::hadoop::defaults::replication_factor
 
 ) inherits cdh4::hadoop::defaults
 {
