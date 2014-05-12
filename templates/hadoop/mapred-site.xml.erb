@@ -109,7 +109,7 @@
 
 <% if @mapreduce_map_java_opts -%>
   <property>
-    <name>mapreduce.map.java.opts</name>
+    <name>mapred.child.java.opts</name>
     <value><%= mapreduce_map_java_opts %></value>
   </property>
 <% end -%>
@@ -147,6 +147,11 @@
   <property>
     <name>mapreduce.output.fileoutputformat.compress.type</name>
     <value>BLOCK</value>
+  </property>
+
+  <property>
+    <name>mapred.local.dir</name>
+    <value>/mnt/disk1/mapred/local</value>
   </property>
 
   <property>
